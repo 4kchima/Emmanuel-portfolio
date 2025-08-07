@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BMI Indicator</title>
+  <style>
+
+    body {
+        background-image: url(./bmi-classification-chart-measurement-woman-colorful-infographic-with-ruler-female-body-mass-index-scale-collection-from-underweight-to-overweight-fit-person-different-weight-level-eps-vecto.jpg);
+      font-family: Arial, sans-serif;
+      padding: 10px;
+      max-width: 400px;
+      margin: auto;
+    }
+    label, input {
+      display: block;
+      margin-bottom: 10px;
+    }
+    .result {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-style: italic;color: brown;font-size: 1000%;margin-top: -10%;text-decoration: double;">BMI CALCULATOR</h2>
+  <label for="weight">Weight (kg):</label>
+  <input type="number" id="weight" placeholder="e.g., 70"> 
+
+  <label for="height">Height (cm):</label>
+  <input type="number" id="height" placeholder="e.g., 120">
+
+  <button onclick="calculateBMI()">Calculate BMI</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculateBMI() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      const heightCm = parseFloat(document.getElementById('height').value);
+
+      if (isNaN(weight) || isNaN(heightCm) || weight <= 0 || heightCm <= 0) {
+        document.getElementById('result').innerText = "Please enter valid positive numbers.";
+        return;
+      }
+
+      const heightM = heightCm / 100;
+      const bmi = (weight / (heightM * heightM)).toFixed(1);
+      let category = "";
+
+      if (bmi < 18.5) {
+        category = "Underweight";
+      } else if (bmi < 24.9) {
+        category = "Normal weight";
+      } else if (bmi < 29.9) {
+        category = "Overweight";
+      } else {
+        category = "Obese";
+      }
+
+      document.getElementById('result').innerText = `Your BMI is ${bmi} (${category}).`;
+    }
+  </script>
+
+</body>
+</html>
